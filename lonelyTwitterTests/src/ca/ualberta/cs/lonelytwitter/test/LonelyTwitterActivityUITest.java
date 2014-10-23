@@ -36,5 +36,16 @@ public class LonelyTwitterActivityUITest extends
 	}
 	
 //TODO: Add your code here:
-			
+	@UiThreadTest
+
+	public void testMakeTweet(){
+		LonelyTwitterActivity lta = getActivity();
+		int oldLength = lta.getAdapter().getCount();
+		makeTweet("test new element");
+		ArrayAdapter<NormalTweetModel> aa = lta.getAdapter();
+		assertEquals(aa.getCount(), oldLength+1);
+		assertTrue(aa.getItem(0) instanceof NormalTweetModel);
+		assertEquals(aa.getItem(aa.getCount()-1).getText(), "test new element");
+		
+	}
 }
